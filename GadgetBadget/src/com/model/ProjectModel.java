@@ -13,15 +13,12 @@ public class ProjectModel {
 	{
 		
 		Connection con = null;
-		
-		String url = "jdbc:mysql://http://localhost:3306/gadgetbadget";
-		String username = "root";
-		String password = "";
-		
+
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver"); 
-			con= DriverManager.getConnection(url, username, password); 
+			con= DriverManager.getConnection("jdbc:mysql://localhost:3306/gadgetbadget?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+					"root", ""); 
 		}
 		catch(Exception e)
 		{
@@ -32,6 +29,7 @@ public class ProjectModel {
 		
 	}
 	
+	//INsert Projects Details
 	public String insertProjects(String name, String category, String description) 
 	{
 		String output = ""; 
@@ -67,6 +65,7 @@ public class ProjectModel {
 		
 	}
 	
+	//Read Inserted Projects
 	public String retrieveProjects() 
 	{
 		String output = ""; 
@@ -74,7 +73,7 @@ public class ProjectModel {
 		try {
 			Connection con = connect(); 
 			if (con == null)
-			{return "Error while connecting to the database for reading."; } 
+			{return "Error while connecting to the database for reading..."; } 
 			
 			// Prepare the html table to be displayed 
 			output = "<table border='1'><tr><th>Project Name</th><th>Project Category</th>" +
@@ -121,5 +120,70 @@ public class ProjectModel {
 		
 		
 	}
+	
+	//Update Projects Details
+	public String updateProjects(Integer ID, String name, String category, String description)
+	{
+		String output = ""; 
+		try {
+			Connection con = connect(); 
+			if (con == null)
+			{return "Error while connecting to the database for updating."; } 
+			
+			// create a prepared statement 
+			String query = "UPDATE projects SET Pro_Name=?,Pro_Category=?,Pro_Decription=?"
+					+ "      WHERE Pro_ID=?"; 
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			
+			// binding values 
+			preparedStmt.setString(1, name); 
+			preparedStmt.setString(2, category); 
+			preparedStmt.setString(3, description);
+			
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+
+			output = "Updated successfully"; 
+		}
+		catch(Exception e)
+		{
+			output = "Error while updating the Projects.";
+			System.err.println(e.getMessage()); 
+		}
+
+		return output; 
+		
+	}
+	
+	//Delete Projects
+	public String deleteProjects(String Pro_ID) 
+	{
+		String output = ""; 
+		try
+		{
+			Connection con = connect(); 
+			if (con == null)
+			{return "Error while connecting to the database for deleting..."; }
+			
+			// create a prepared statement 
+			String query = "delete from projects where Pro_ID=?";
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			
+		}
+		catch(Exception e)
+		{
+			output = "Error while deleting the Projects.";
+			System.err.println(e.getMessage()); 
+		}
+		
+		return Pro_ID;
+		
+	}
+	
+	
+	
 	
 }
