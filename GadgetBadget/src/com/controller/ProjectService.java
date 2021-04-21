@@ -36,12 +36,12 @@ public class ProjectService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String insertProjects(@FormParam("name") String name,
-			@FormParam("category") String category,
-			@FormParam("description") String description)
+	public String insertProjects(@FormParam("Pro_Name") String Pro_Name,
+			@FormParam("Pro_Category") String Pro_Category,
+			@FormParam("Pro_Description") String Pro_Description)
 			 
 	{ 
-		String output = ProjectObj.insertProjects(name, category, description);
+		String output = ProjectObj.insertProjects(Pro_Name, Pro_Category, Pro_Description);
 		return output; 
 	}
 	
@@ -57,12 +57,12 @@ public class ProjectService {
 		JsonObject ProjectOb = new JsonParser().parse(ProjectData).getAsJsonObject(); 
 		
 		//Read the values from the JSON object 
-		Integer Pro_ID = ProjectOb.get("Pro_ID").getAsInt();
+		String Pro_ID = ProjectOb.get("Pro_ID").getAsString();
 		String Pro_Name = ProjectOb.get("Pro_Name").getAsString();
 		String Pro_Category = ProjectOb.get("Pro_Category").getAsString(); 
-		String Pro_Decription = ProjectOb.get("Pro_Decription").getAsString(); 
+		String Pro_Description = ProjectOb.get("Pro_Description").getAsString(); 
 		
-		String output = ProjectObj.updateProjects(Pro_ID, Pro_Name, Pro_Category, Pro_Decription); 
+		String output = ProjectObj.updateProjects(Pro_ID, Pro_Name, Pro_Category, Pro_Description); 
 		
 		return output;
 	}
@@ -73,10 +73,10 @@ public class ProjectService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML) 
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteProjects(String itemData) 
+	public String deleteProjects(String ProjectData) 
 	{
 		//Convert the input string to an XML document 
-		Document doc = Jsoup.parse(itemData, "", Parser.xmlParser()); 
+		Document doc = Jsoup.parse(ProjectData, "", Parser.xmlParser()); 
 		
 		//Read the value from the element <Pro_ID>
 		String Pro_ID = doc.select("Pro_ID").text(); 
