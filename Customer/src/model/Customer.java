@@ -28,7 +28,7 @@ public class Customer {
 			if (con == null)
 			{return "Error while connecting to the database for inserting."; }
 			
-			String query = " insert into customer('customerid','Name','Email','Phone_number')"+ " values(?,?,?,?)";
+			String query = " insert into customer(customerid,Name,Email,Phone_number)"+ " values(?,?,?,?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
