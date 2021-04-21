@@ -28,7 +28,8 @@ public class Payment {
 			{return "Error while connecting to the database for inserting."; } 
 			
 			// create a prepared statement
-			String query = " insert into payment_t (payment_id,cus_name,mobile_no,amount,email,card_type,card_no,exp_month,exp_year,cvn)" +  "values (?,?,?,?,?,?,?,?,?,?)"; 
+			String query = " insert into payment_t (payment_id,cus_name,mobile_no,amount,email,card_type,card_no,exp_month,exp_year,cvn"
+					+ ")" +  "values (?,?,?,?,?,?,?,?,?,?)"; 
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			
 			// binding values
@@ -73,6 +74,7 @@ public class Payment {
 				 "<th>Card Number</th>" +
 				 "<th>Expiration Month</th>" +
 				 "<th>Expiration Year</th>" +
+				 "<th>CVN</th>" +
 				 "<th>Update</th><th>Remove</th></tr>"; 
 	 
 		 String query = "select * from payment_t"; 
@@ -89,6 +91,7 @@ public class Payment {
 		 String amount = rs.getString("amount"); 
 		 String email = rs.getString("email");
 		 String card_type = rs.getString("card_type");
+		 String card_no = rs.getString("card_no");
 		 String exp_month = rs.getString("exp_month");
 		 String exp_year = rs.getString("exp_year");
 		 String cvn = rs.getString("cvn");
@@ -99,6 +102,7 @@ public class Payment {
 		 output += "<td>" + amount + "</td>"; 
 		 output += "<td>" + email + "</td>"; 
 		 output += "<td>" + card_type + "</td>";
+		 output += "<td>" + card_no + "</td>";
 		 output += "<td>" + exp_month + "</td>";
 		 output += "<td>" + exp_year + "</td>";
 	 	 output += "<td>" + cvn + "</td>";
@@ -125,7 +129,7 @@ public class Payment {
 	 } 
 	
 	
-	public String updatePayment(String payment_id, String cus_name, String mobile_no, String amount, String email, String card_type, String exp_month, String exp_year, String cvn)
+	public String updatePayment(String payment_id, String cus_name, String mobile_no, String amount, String email, String card_type,String 	card_no,String exp_month, String exp_year, String cvn)
 	 { 
 		String output = ""; 
 	 try
@@ -134,7 +138,7 @@ public class Payment {
 		 if (con == null) 
 		 {return "Error while connecting to the database for updating."; } 
 		 // create a prepared statement
-		 String query = "UPDATE payment_t SET cus_name=?,mobile_no=?,amount=?,email=?,card_type=?,exp_month=?,exp_year=?,cvn=? WHERE payment_id=?"; 
+		 String query = "UPDATE payment_t SET cus_name=?,mobile_no=?,amount=?,email=?,card_type=?,card_no=?,exp_month=?,exp_year=?,cvn=? WHERE payment_id=?"; 
 		PreparedStatement preparedStmt = con.prepareStatement(query); 
 		
 		// binding values
@@ -143,10 +147,11 @@ public class Payment {
 		preparedStmt.setString(3, amount); 
 		preparedStmt.setString(4, email);
 		preparedStmt.setString(5, card_type);
-		preparedStmt.setString(6, exp_month);
-		preparedStmt.setString(7, exp_year);
-		preparedStmt.setString(8, cvn);
-		preparedStmt.setInt(9, Integer.parseInt(payment_id)); 
+		preparedStmt.setString(6, card_no);
+		preparedStmt.setString(7, exp_month);
+		preparedStmt.setString(8, exp_year);
+		preparedStmt.setString(9, cvn);
+		preparedStmt.setInt(10, Integer.parseInt(payment_id)); 
 		
 		// execute the statement
 		preparedStmt.execute(); 
@@ -173,7 +178,7 @@ public class Payment {
 		 {return "Error while connecting to the database for deleting."; } 
 		 
 		 // create a prepared statement
-		 String query = "delete from items where payment_id=?"; 
+		 String query = "delete from payment_t where payment_id=?"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query); 
 		 
 		 // binding values

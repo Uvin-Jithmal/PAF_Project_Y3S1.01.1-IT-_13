@@ -60,7 +60,7 @@ public class Payment_Service
 	 String exp_month = itemObject.get("exp_month").getAsString();
 	 String exp_year = itemObject.get("exp_year").getAsString();
 	 String cvn = itemObject.get("cvn").getAsString();
-	 String output = paymentobj.updatePayment(payment_id, cus_name, mobile_no, amount, email, card_type, exp_month, exp_year, cvn); 
+	 String output = paymentobj.updatePayment(payment_id, cus_name, mobile_no, amount, email, card_type, card_no, exp_month, exp_year, cvn); 
 	return output; 
 	}
 	
@@ -68,7 +68,7 @@ public class Payment_Service
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String deleteItem(String paymentData) 
+	public String deletePayment(String paymentData) 
 	{ 
 	//Convert the input string to an XML document
 	 Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser()); 
@@ -78,11 +78,6 @@ public class Payment_Service
 	 String output = paymentobj.deletePayment(payment_id);
 	 return output; 
 	}
-	
-
-	
-	
-	
-
+		
 }
 
