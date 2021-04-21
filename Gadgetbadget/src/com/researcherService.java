@@ -29,15 +29,15 @@ public class researcherService {
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String insertResearcher(@FormParam("RID") int RID, 
-	 @FormParam("Rname") String Rname, 
-	 @FormParam("Remail") String Remail, 
-	 @FormParam("Rabout") String Rabout,
-	 @FormParam("Pname") String Pname,
-	 @FormParam("PDes") String PDes,
-	 @FormParam("Pprice") int Pprice) 
+	public String insertResearcher( 
+	 @FormParam("ResearcherName") String ResearcherName, 
+	 @FormParam("ResearcherEmail") String ResearcherEmail, 
+	 @FormParam("AboutResearcher") String AboutResearcher,
+	 @FormParam("ProjectName") String ProjectName,
+	 @FormParam("ProjectDescription") String ProjectDescription,
+	 @FormParam("ProjectPrice") String ProjectPrice) 
 	{ 
-	 String output = reObj.insertResearcher(RID, Rname, Remail, Rabout,Pname,PDes,Pprice); 
+	 String output = reObj.insertResearcher(ResearcherName, ResearcherEmail, AboutResearcher,ProjectName,ProjectDescription,ProjectPrice); 
 	return output; 
 	}
 

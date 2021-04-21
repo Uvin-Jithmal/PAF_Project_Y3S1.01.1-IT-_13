@@ -37,7 +37,7 @@ public class researcher {
 //insert
 	
 	
-	public String insertResearcher(int RID, String Rname, String Remail, String Rabout,String Pname,String PDes,int Pprice)
+	public String insertResearcher(String Rname, String Remail, String Rabout,String Pname,String PDes,String Pprice)
 	{ 
 	 String output = ""; 
 	try
@@ -50,17 +50,17 @@ public class researcher {
 	 // create a prepared statement
 
 	 
-	 String query = " insert into researcher( ResearcherID,ResearcherName,ResearcherEmail,AboutResearcher,ProjectName,ProjectDescription,Projectprice)"
+	 String query = " insert into researcher( `ResearcherID`,`ResearcherName`,`ResearcherEmail`,`AboutResearcher`,`ProjectName`,`ProjectDescription`,`Projectprice`)"
 	 + " values (?, ?, ?, ?, ?, ?, ?)"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
-	 preparedStmt.setInt(1, RID); 
+	 preparedStmt.setInt(1, 0); 
 	 preparedStmt.setString(2, Rname); 
 	 preparedStmt.setString(3, Remail); 
 	 preparedStmt.setString(4, Rabout);
 	 preparedStmt.setString(5, Pname);
 	 preparedStmt.setString(6, PDes);
-	 preparedStmt.setInt(7, Pprice);
+	 preparedStmt.setInt(7, Integer.parseInt(Pprice));
 	//execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 
