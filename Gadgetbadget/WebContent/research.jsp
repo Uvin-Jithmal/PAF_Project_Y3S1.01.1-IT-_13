@@ -14,26 +14,14 @@
 			 session.setAttribute("Pprice", request.getParameter("Pprice"));
 			 }
  
- 
- 
- 
-				if (request.getParameter("Rname") != null) 
-			{ 
-			researcher reObj = new researcher(); 
-			reObj.connect();//For testing the connect method
-			
-			//pass values      Integer.parseInt(request.getParameter("RID"))
-			String stsMsg = reObj.insertResearcher(0, request.getParameter("Rname"),
-					request.getParameter("Remail"), request.getParameter("Rabout"), request.getParameter("Pname"), request.getParameter("PDes"),Integer.parseInt(request.getParameter("Pprice")) );
-					
-					 session.setAttribute("statusMsg", stsMsg); 
-			
-			}
+ %>
 
- 
- 
- 
-%>
+
+
+
+
+
+
     
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

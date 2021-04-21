@@ -18,10 +18,14 @@ public class researcher {
 	 try 
 	 { 
 	 Class.forName("com.mysql.jdbc.Driver"); 
-	 con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+	// con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+	//			"root", ""); 
+	 con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget",
 				"root", ""); 
+	 
+	 
 	 //For testing
-	 System.out.print("Successfully connected"); 
+	 System.out.print("Successfully connected "); 
 	 } 
 	 catch(Exception e) 
 	 { 
@@ -37,7 +41,7 @@ public class researcher {
 //insert
 	
 	
-	public String insertResearcher(String Rname, String Remail, String Rabout,String Pname,String PDes,String Pprice)
+	public String insertResearcher(String ResearcherName,String ResearcherEmail,String AboutResearcher,String ProjectName,String ProjectDescription,String ProjectPrice)
 	{ 
 	 String output = ""; 
 	try
@@ -50,25 +54,28 @@ public class researcher {
 	 // create a prepared statement
 
 	 
-	 String query = " insert into researcher( `ResearcherID`,`ResearcherName`,`ResearcherEmail`,`AboutResearcher`,`ProjectName`,`ProjectDescription`,`Projectprice`)"
-	 + " values (?, ?, ?, ?, ?, ?, ?)"; 
+	 String query = " insert into researcher(ResearcherID,ResearcherName,ResearcherEmail,AboutResearcher,ProjectName,ProjectDescription,Projectprice)" + " values (?, ?, ?, ?, ?, ?, ?)"; 
+	// String query1 ="insert into researcher values(0,"+ResearcherName+","+ResearcherEmail+","+AboutResearcher+","+ProjectName+","+ProjectDescription+","+ProjectPrice+")";
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
 	 preparedStmt.setInt(1, 0); 
-	 preparedStmt.setString(2, Rname); 
-	 preparedStmt.setString(3, Remail); 
-	 preparedStmt.setString(4, Rabout);
-	 preparedStmt.setString(5, Pname);
-	 preparedStmt.setString(6, PDes);
-	 preparedStmt.setInt(7, Integer.parseInt(Pprice));
+	 preparedStmt.setString(2, ResearcherName); 
+	 preparedStmt.setString(3, ResearcherEmail); 
+	 preparedStmt.setString(4, AboutResearcher);
+	 preparedStmt.setString(5, ProjectName);
+	 preparedStmt.setString(6, ProjectDescription);
+	 preparedStmt.setInt(7, Integer.parseInt(ProjectPrice));
 	//execute the statement
+	//PreparedStatement preparedStmt1 = con.prepareStatement(query1); 
+    //preparedStmt1.execute();
+	 
 	 preparedStmt.execute(); 
 	 con.close(); 
 	 output = "Inserted successfully"; 
 	 } 
 	catch (Exception e) 
 	 { 
-	 output = "Error while inserting"; 
+	 output = "Error while inserting........"; 
 	 System.err.println(e.getMessage()); 
 	 } 
 	return output; 
@@ -134,7 +141,7 @@ public class researcher {
 	 } 
 	
 	
-	public String updateResearcher(int RID, String Rname, String Remail, String Rabout,String Pname,String PDes,int Pprice)
+	public String updateResearcher(String ResearcherID, String ResearcherName, String ResearcherEmail, String AboutResearcher,String ProjectName,String ProjectDescription,String ProjectPrice)
 	 { 
 	 String output = ""; 
 	 try
@@ -143,16 +150,16 @@ public class researcher {
 	 if (con == null) 
 	 {return "Error while connecting to the database for updating."; } 
 	 // create a prepared statement
-	 String query = "UPDATE researcher SET ResearcherName=?,ResearcherEmail=?,AboutReseacher=?,ProjectName=?,ProjectDescription=?,ProjectPrice=? WHERE ResearcherID=?"; 
+	 String query = "UPDATE researcher SET ResearcherName=?,ResearcherEmail=?,AboutResearcher=?,ProjectName=?,ProjectDescription=?,ProjectPrice=? WHERE ResearcherID=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
-	 preparedStmt.setString(1, Rname); 
-	 preparedStmt.setString(2, Remail); 
-	 preparedStmt.setString(3, Rabout);
-	 preparedStmt.setString(4, Pname);
-	 preparedStmt.setString(5, PDes);
-	 preparedStmt.setInt(6, Pprice); 
-	 preparedStmt.setInt(7, (RID)); 
+	 preparedStmt.setString(1, ResearcherName); 
+	 preparedStmt.setString(2, ResearcherEmail); 
+	 preparedStmt.setString(3, AboutResearcher);
+	 preparedStmt.setString(4, ProjectName);
+	 preparedStmt.setString(5, ProjectDescription);
+	 preparedStmt.setInt(6, Integer.parseInt(ProjectPrice)); 
+	 preparedStmt.setInt(7, Integer.parseInt(ResearcherID)); 
 	 // execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 
@@ -166,8 +173,8 @@ public class researcher {
 	 return output; 
 	 } 
 	
-	/*
-	public String deleteItem(String itemID) 
+	
+	public String deleteResearcher(String ResearcherID) 
 	 { 
 	 String output = ""; 
 	 try
@@ -176,10 +183,10 @@ public class researcher {
 	 if (con == null) 
 	 {return "Error while connecting to the database for deleting."; } 
 	 // create a prepared statement
-	 String query = "delete from items where itemID=?"; 
+	 String query = "delete from researcher where ResearcherID=?"; 
 	 PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 // binding values
-	 preparedStmt.setInt(1, Integer.parseInt(itemID)); 
+	 preparedStmt.setInt(1, Integer.parseInt(ResearcherID)); 
 	 // execute the statement
 	 preparedStmt.execute(); 
 	 con.close(); 
@@ -197,7 +204,7 @@ public class researcher {
 	
 	
 	
-	*/
+
 	
 	
 	
