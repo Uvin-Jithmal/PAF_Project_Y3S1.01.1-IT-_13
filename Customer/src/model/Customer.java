@@ -120,13 +120,15 @@ public class Customer {
 		{return "Error while connecting to the database for updating."; }
 		
 		// create a prepared statement
-		String query = "UPDATE items SET Name=?,Email=?,Phone_number=?WHERE customerid=?";
+		String query = "UPDATE customer SET Name=?, Email=?, Phone_number=? WHERE customerid=?";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		// binding values
 		preparedStmt.setString(1, Name);
 		preparedStmt.setString(2, Email);
 		preparedStmt.setString(3, Phone_number);
+		preparedStmt.setInt(4, Integer.parseInt(customerid));
+		
 		
 		// execute the statement
 		preparedStmt.execute();
