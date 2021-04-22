@@ -2,6 +2,7 @@ package model;
 import java.sql.*;
 
 
+
 public class Payment {
 	
 	private Connection connect() 
@@ -28,8 +29,7 @@ public class Payment {
 			{return "Error while connecting to the database for inserting."; } 
 			
 			// create a prepared statement
-			String query = " insert into payment_t (payment_id,cus_name,mobile_no,amount,email,card_type,card_no,exp_month,exp_year,cvn"
-					+ ")" +  "values (?,?,?,?,?,?,?,?,?,?)"; 
+			String query = " insert into payment_t (payment_id,cus_name,mobile_no,amount,email,card_type,card_no,exp_month,exp_year,cvn)" + "values (?,?,?,?,?,?,?,?,?,?)"; 
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			
 			// binding values
@@ -187,7 +187,7 @@ public class Payment {
 		 // execute the statement
 		 preparedStmt.execute(); 
 		 con.close(); 
-		 output = "Deleted successfully"; 
+		 output = "Deleted successfully";
 	 } 
 	 catch (Exception e) 
 	 { 
