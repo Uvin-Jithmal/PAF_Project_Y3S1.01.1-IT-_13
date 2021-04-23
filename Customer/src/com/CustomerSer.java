@@ -34,9 +34,10 @@ public class CustomerSer {
 	@Produces(MediaType.TEXT_PLAIN)
 		public String insertItem(@FormParam("Name") String Name,
 	@FormParam("Email") String Email,
-	@FormParam("Phone_number") String Phone_number)
+	@FormParam("Phone_number") String Phone_number,
+	@FormParam("Project_name") String Project_name)	
 	{
-	String output = Cusobj.insertcustomer(Name, Email, Phone_number);
+	String output = Cusobj.insertcustomer(Name, Email, Phone_number,Project_name);
 	return output;
 	}
 	
@@ -53,7 +54,8 @@ public class CustomerSer {
 	String Name = itemObject.get("Name").getAsString();
 	String Email = itemObject.get("Email").getAsString();
 	String Phone_number = itemObject.get("Phone_number").getAsString();
-	String output = Cusobj.updatecustomer(customerid, Name, Email, Phone_number);
+	String Project_name = itemObject.get("Project_name").getAsString();
+	String output = Cusobj.updatecustomer(customerid, Name, Email, Phone_number,Project_name);
 	return output;
 	}
 	

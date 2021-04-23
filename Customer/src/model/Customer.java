@@ -19,7 +19,7 @@ public class Customer {
 	
 	}
 	
-	public String insertcustomer(String Name,String Email,String Phone_number)
+	public String insertcustomer(String Name,String Email,String Phone_number,String Project_name)
 	{
 		String output = "";
 		try
@@ -28,7 +28,7 @@ public class Customer {
 			if (con == null)
 			{return "Error while connecting to the database for inserting."; }
 			
-			String query = " insert into customer(customerid,Name,Email,Phone_number)"+ " values(?,?,?,?)";
+			String query = " insert into customer(customerid,Name,Email,Phone_number,Project_name)"+ " values(?,?,?,?,?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
@@ -37,6 +37,7 @@ public class Customer {
 			preparedStmt.setString(2, Name);
 			preparedStmt.setString(3, Email);
 			preparedStmt.setString(4, Phone_number);
+			preparedStmt.setString(5, Project_name);
 			
 			// execute the statement
 			preparedStmt.execute();
@@ -66,7 +67,7 @@ public class Customer {
 			
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>Name</th><th>Email</th>" +
-						"<th>Phone_number</th></tr>";
+						"<th>Phone_number</th><th>Project_name</th></tr>";
 			
 			String query = "select * from customer";
 			Statement stmt = con.createStatement();
@@ -80,12 +81,14 @@ public class Customer {
 				String Name = rs.getString("Name");
 				String Email = rs.getString("Email");
 				String Phone_number = rs.getString("Phone_number");
+				String Project_name = rs.getString("Project_name");
 				
 				// Add into the html table
 				
 				output += "<tr><td>" + Name + "</td>";
 				output += "<td>" + Email + "</td>";
 				output += "<td>" + Phone_number + "</td>";
+				output += "<td>" + Project_name + "</td>";
 				
 				// buttons
 				
@@ -109,7 +112,7 @@ public class Customer {
 				return output;
 			}
 	
-	public String updatecustomer(String customerid, String Name, String Email, String Phone_number)
+	public String updatecustomer(String customerid, String Name, String Email, String Phone_number, String Project_name)
 	{
 		String output = "";
 		
@@ -120,14 +123,15 @@ public class Customer {
 		{return "Error while connecting to the database for updating."; }
 		
 		// create a prepared statement
-		String query = "UPDATE customer SET Name=?, Email=?, Phone_number=? WHERE customerid=?";
+		String query = "UPDATE customer SET Name=?, Email=?, Phone_number=? ,Project_name=? WHERE customerid=?";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		// binding values
 		preparedStmt.setString(1, Name);
 		preparedStmt.setString(2, Email);
 		preparedStmt.setString(3, Phone_number);
-		preparedStmt.setInt(4, Integer.parseInt(customerid));
+		preparedStmt.setString(4, Project_name);
+		preparedStmt.setInt(5, Integer.parseInt(customerid));
 		
 		
 		// execute the statement
