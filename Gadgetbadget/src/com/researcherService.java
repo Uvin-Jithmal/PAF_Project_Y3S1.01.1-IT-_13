@@ -17,7 +17,7 @@ public class researcherService {
 
 	researcher reObj = new researcher(); 
 	@GET
-	@Path("/") 
+	@Path("/ViewResearcher") 
 	@Produces(MediaType.TEXT_HTML) 
 	public String readResearcher() 
 	 { 
@@ -26,7 +26,7 @@ public class researcherService {
 	
 	researcher reObj1 = new researcher(); 
 	@POST
-	@Path("/") 
+	@Path("/InsertResearcher") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String insertResearcher(@FormParam("ResearcherName") String ResearcherName, 
@@ -42,7 +42,7 @@ public class researcherService {
 
 	
 	@PUT
-	@Path("/") 
+	@Path("/UpdateResearcher") 
 	@Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String updateResearcher(String itemData) 
@@ -64,7 +64,7 @@ public class researcherService {
 	
 	
 	@DELETE
-	@Path("/") 
+	@Path("/DeleteResearcher") 
 	@Consumes(MediaType.APPLICATION_XML) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String deleteResearcher(String ResearcherData) 
