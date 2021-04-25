@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+//Implement the server models
 public class ProjectModel {
 
 	// Database connection method
@@ -15,6 +16,7 @@ public class ProjectModel {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			 //Provide the correct details: DBServer/DBName 
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/gadgetbadget?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
 					"root", "");
@@ -28,10 +30,13 @@ public class ProjectModel {
 
 	// Insert Projects Details
 	public String insertProjects(String name, String category, String description) {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
+				//If connection failed
 				return "Error while connecting to the database for inserting.";
 			}
 			
@@ -57,13 +62,15 @@ public class ProjectModel {
 		return output;
 	}
 
-	// Read  Projects
+	// Read  Project Details
 	public String retrieveProjects() {
+		
 		String output = "";
 
 		try {
 			Connection con = connect();
 			if (con == null) {
+				//If connection failed
 				return "Error while connecting to the database for reading...";
 			}
 
@@ -88,7 +95,7 @@ public class ProjectModel {
 				output += "<td>" + Pro_Category + "</td>";
 				output += "<td>" + Pro_Description + "</td>";
 
-				// buttons
+				// Update and Delete Button
 				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
 						+ "<td><form method='post' action='projects.jsp'>"
 						+ "<input name='btnRemove' type='submit' value='Delete' class='btn btn-danger'>"
@@ -110,10 +117,13 @@ public class ProjectModel {
 
 	// Update Projects Details
 	public String updateProjects(String ID, String name, String category, String description) {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
+				//If connection failed
 				return "Error while connecting to the database for updating.";
 			}
 
@@ -144,10 +154,13 @@ public class ProjectModel {
 
 	// Delete Projects
 	public String deleteProjects(String Pro_ID) {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
+				//If connection failed
 				return "Error while connecting to the database for deleting...";
 			}
 
