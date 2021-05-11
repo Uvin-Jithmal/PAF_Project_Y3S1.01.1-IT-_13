@@ -99,7 +99,7 @@ public class researcher {
 				String PDes = rs.getString("ProjectDescription");
 				String Pprice = Integer.toString(rs.getInt("Projectprice"));
 				// Add into the html table
-				output += "<tr><td>" + RID + "</td>";
+				output += "<tr><td><input id='hidResearcherIDSave' name='hidResearcherIDSave' type='hidden' value='" + RID + "'</td>";
 				output += "<td>" + Rname + "</td>";
 				output += "<td>" + Remail + "</td>";
 				output += "<td>" + Rabout + "</td>";
@@ -108,9 +108,9 @@ public class researcher {
 				output += "<td>" + Pprice + "</td>";
 				// buttons
 				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-						+ "<td><form method='post' action='items.jsp'>"
+						+ "<td><form method='post' action='research.jsp'>"
 						+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-						+ "<input name='itemID' type='hidden' value='" + RID + "'>" + "</form></td></tr>";
+						+ "<input name='hidResearcherIDSave' type='hidden' value='" + RID + "'>" + "</form></td></tr>";
 			}
 			con.close();
 			// Complete the html table

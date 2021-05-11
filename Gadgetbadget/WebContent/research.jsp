@@ -3,14 +3,33 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%
-	if (request.getParameter("Rname") != null) {
+	if (request.getParameter("txtRName") != null) {
 		session.setAttribute("RID", request.getParameter("RID"));
-		session.setAttribute("Rname", request.getParameter("Rname"));
+		session.setAttribute("txtRName", request.getParameter("Rname"));
 		session.setAttribute("Remail", request.getParameter("Remail"));
 		session.setAttribute("Rabout", request.getParameter("Rabout"));
 		session.setAttribute("Pname", request.getParameter("Pname"));
 		session.setAttribute("PDes", request.getParameter("PDes"));
 		session.setAttribute("Pprice", request.getParameter("Pprice"));
+	}
+
+	if (request.getParameter("txtRName") != null) {
+		researcher ReObj = new researcher();
+		String stsMsg = "";
+		//Insert--------------------------
+		if (request.getParameter("hidItemIDSave") == "") {
+			stsMsg = ReObj.insertResearcher(request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
+		} else//Update----------------------
+		{
+			stsMsg = ReObj.updateResearcher(request.getParameter("hidResearcherIDSave"),request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
+		}
+		session.setAttribute("statusMsg", stsMsg);
+	}
+	//Delete-----------------------------
+	if (request.getParameter("hidItemIDDelete") != null) {
+		researcher ReObj = new researcher();
+		String stsMsg = ReObj.deleteResearcher(request.getParameter("hidResearcherIDSave"));
+		session.setAttribute("statusMsg", stsMsg);
 	}
 %>
 
@@ -39,7 +58,7 @@
 		<div class="row">
 			<div class="col-8">
 				<h1 class="m-3">Young Researcher details</h1>
-				<form id="formResearcher">
+				<form id="formResearcher" name ="formResearcher" method="post" action="research.jsp">
 
 					<!-- NAME -->
 					<div class="input-group input-group-sm mb-3">
@@ -93,6 +112,9 @@
 					<div id="alertError" class="alert alert-danger"></div>
 					<input type="button" id="btnSave" value="Save"
 						class="btn btn-primary">
+						
+					<input type="hidden" id="hidResearcherIDSave" name="hidResearcherIDSave" value="">
+						
 						
 					</form>
 			</div>
