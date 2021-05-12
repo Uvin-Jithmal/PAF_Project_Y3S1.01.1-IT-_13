@@ -27,7 +27,7 @@ $(document).on(
 		".btnUpdate",
 		function(event) {
 			$("#hidResearcherIDSave").val(
-					$(this).closest("tr").find('#hidResearcherIDSave').val());
+					$(this).closest("tr").find('#hidResearcherIDUpdate').val());
 			$("#txtRName").val($(this).closest("tr").find('td:eq(0)').text());
 			$("#txtEmail").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#txtAbout").val($(this).closest("tr").find('td:eq(2)').text());

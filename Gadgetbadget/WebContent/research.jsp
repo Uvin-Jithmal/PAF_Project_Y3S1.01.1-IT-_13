@@ -3,34 +3,26 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%
-	if (request.getParameter("txtRName") != null) {
-		session.setAttribute("RID", request.getParameter("RID"));
-		session.setAttribute("txtRName", request.getParameter("Rname"));
-		session.setAttribute("Remail", request.getParameter("Remail"));
-		session.setAttribute("Rabout", request.getParameter("Rabout"));
-		session.setAttribute("Pname", request.getParameter("Pname"));
-		session.setAttribute("PDes", request.getParameter("PDes"));
-		session.setAttribute("Pprice", request.getParameter("Pprice"));
-	}
+	
 
-	if (request.getParameter("txtRName") != null) {
-		researcher ReObj = new researcher();
-		String stsMsg = "";
-		//Insert--------------------------
-		if (request.getParameter("hidItemIDSave") == "") {
-			stsMsg = ReObj.insertResearcher(request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
-		} else//Update----------------------
-		{
-			stsMsg = ReObj.updateResearcher(request.getParameter("hidResearcherIDSave"),request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
-		}
-		session.setAttribute("statusMsg", stsMsg);
+if (request.getParameter("txtRName") != null) {
+	researcher ReObj = new researcher();
+	String stsMsg = "";
+	//Insert--------------------------
+	if (request.getParameter("hidItemIDSave") == "") {
+		stsMsg = ReObj.insertResearcher(request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
+	} else//Update----------------------
+	{
+		stsMsg = ReObj.updateResearcher(request.getParameter("hidResearcherIDSave"),request.getParameter("txtRName"),request.getParameter("txtEmail"),request.getParameter("txtAbout"),request.getParameter("txtPName"),request.getParameter("txtPDescription"),request.getParameter("txtPPrice"));
 	}
-	//Delete-----------------------------
-	if (request.getParameter("hidItemIDDelete") != null) {
-		researcher ReObj = new researcher();
-		String stsMsg = ReObj.deleteResearcher(request.getParameter("hidResearcherIDSave"));
-		session.setAttribute("statusMsg", stsMsg);
-	}
+	session.setAttribute("statusMsg", stsMsg);
+}
+//Delete-----------------------------
+if (request.getParameter("hidItemIDDelete") != null) {
+	researcher ReObj = new researcher();
+	String stsMsg = ReObj.deleteResearcher(request.getParameter("hidItemIDDelete"));
+	session.setAttribute("statusMsg", stsMsg);
+}
 %>
 
 
@@ -128,29 +120,28 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
