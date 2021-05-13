@@ -63,9 +63,14 @@ public class researcher {
 
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			
+			String newResearcher = readResearcher();
+			output = "{\"status\":\"success\", \"data\": \"" +newResearcher + "\"}"; 
+			//output = "Inserted successfully";
 		} catch (Exception e) {
-			output = "Error while inserting........";
+			output = "{\"status\":\"success\", \"data\": \"Error while inserting.\"}"; 
+			
+			//output = "Error while inserting........";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -82,7 +87,7 @@ public class researcher {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Reseacher ID</th><th>Researcher Name</th>" + "<th>Researcher Email</th>"
+			output = "<table border='1'><tr><th>Researcher Name</th>" + "<th>Researcher Email</th>"
 					+ "<th>About Researcher</th>" + "<th>Project Name</th>" + "<th>Project Description</th>"
 					+ "<th>Project Price</th>" + "<th>Update</th><th>Remove</th></tr>";
 
@@ -99,18 +104,24 @@ public class researcher {
 				String PDes = rs.getString("ProjectDescription");
 				String Pprice = Integer.toString(rs.getInt("Projectprice"));
 				// Add into the html table
-				output += "<tr><td><input id='hidResearcherIDUpdate' name='hidResearcherIDUpdate' type='hidden' value='" + RID + "'</td>";
-				output += "<td>" + Rname + "</td>";
+				output += "<tr><td><input id='hidResearcherIDUpdate' name='hidItemIDUpdate' type='hidden' value='" + RID + "'>" + Rname + "</td>";
 				output += "<td>" + Remail + "</td>";
 				output += "<td>" + Rabout + "</td>";
 				output += "<td>" + Pname + "</td>";
 				output += "<td>" + PDes + "</td>";
 				output += "<td>" + Pprice + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-						+ "<td><form method='post' action='research.jsp'>"
-						+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-						+ "<input name='hidResearcherIDDelete' type='hidden' value='" + RID + "'>" + "</form></td></tr>";
+			//	output += "<td><input id= 'btnUpdate' name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary' data-ResearcherID='"+RID+"'></td>"
+				//		+ "<td><input id= 'btnRemove' name='btnRemove' type='button' value='Remove' class='btn btn-danger ' data-RID='"+RID+"'></td></tr>";
+				
+				
+				// buttons
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary' data-rid='" + RID + "' </td>" 
+				+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-rid='" + RID + "'>"
+				+ "</td></tr>";
+				
+				
+						
 			}
 			con.close();
 			// Complete the html table
@@ -146,9 +157,14 @@ public class researcher {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Updated successfully";
+			String newResearcher = readResearcher();
+			output = "{\"status\":\"success\", \"data\": \"" + 
+					 newResearcher + "\"}";
+			
+			//output = "Updated successfully";
 		} catch (Exception e) {
-			output = "Error while updating the item.";
+			output = "{\"status\":\"success\", \"data\": \"Error while Updating.\"}"; 
+			//output = "Error while updating the item.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -171,9 +187,15 @@ public class researcher {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Deleted successfully";
+			String newResearcher = readResearcher();
+			output = "{\"status\":\"success\", \"data\": \"" + 
+					 newResearcher + "\"}";
+			
+			//output = "Deleted successfully";
 		} catch (Exception e) {
-			output = "Error while deleting the item.";
+			output = "{\"status\":\"success\", \"data\": \"Error while Deleting.\"}";
+			
+			//output = "Error while deleting the item.";
 			System.err.println(e.getMessage());
 		}
 		return output;
